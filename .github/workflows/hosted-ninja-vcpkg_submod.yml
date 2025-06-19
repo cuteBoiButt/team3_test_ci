@@ -66,13 +66,13 @@ jobs:
 
           echo "Setting API key..."
           # Set the API key for the source to ensure push access
-          $CMD_PREFIX "$NUGET_EXE_PATH" setapikey "$GH_TOKEN" \
+          $CMD_PREFIX "$NUGET_EXE_PATH" setapikey "${{ secrets.GITHUB_TOKEN }}" \
             -Source "https://nuget.pkg.github.com/cuteBoiButt/index.json"
   
       - name: Set vcpkg binary sources environment variable
         shell: bash
         run: |
-          echo "VCPKG_BINARY_SOURCES=clear;nuget,https://nuget.pkg.github.com/cuteBoiButt/index.json,readwrite" >> $GITHUB_ENV
+          echo "VCPKG_BINARY_SOURCES=clear;nuget,https://nuget.pkg.github.com/cuteBoiButt/index.json,read" >> $GITHUB_ENV
           
       - name: Configure CMake
         run: |
